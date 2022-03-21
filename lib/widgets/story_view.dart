@@ -330,6 +330,7 @@ class StoryItem {
     ImageProvider image, {
     Key? key,
     Text? caption,
+    BoxFit imageFit = BoxFit.cover,
     bool shown = false,
     bool roundedTop = true,
     bool roundedBottom = false,
@@ -346,7 +347,7 @@ class StoryItem {
             ),
             image: DecorationImage(
               image: image,
-              fit: BoxFit.cover,
+              fit: imageFit,
             )),
         child: Container(
           margin: EdgeInsets.only(
