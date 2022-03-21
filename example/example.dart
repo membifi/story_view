@@ -35,6 +35,7 @@ class Home extends StatelessWidget {
             Container(
               height: 300,
               child: StoryView(
+                progressIndicatorColor: Colors.red,
                 controller: controller,
                 storyItems: [
                   StoryItem.text(
@@ -56,6 +57,7 @@ class Home extends StatelessWidget {
                   //   ),
                   // ),
                   StoryItem.inlineImage(
+                    isAsset: false,
                     url:
                         "https://image.ibb.co/cU4WGx/Omotuo-Groundnut-Soup-braperucci-com-1.jpg",
                     controller: controller,
@@ -69,6 +71,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   StoryItem.inlineImage(
+                    isAsset: false,
                     url:
                         "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
                     controller: controller,
@@ -152,6 +155,7 @@ class _MoreStoriesState extends State<MoreStories> {
         title: Text("More"),
       ),
       body: StoryView(
+        progressIndicatorColor: Colors.red,
         storyItems: [
           StoryItem.text(
             title: "I guess you'd love to see more of our food. That's great.",

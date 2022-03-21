@@ -164,8 +164,11 @@ class StoryItem {
   /// Shorthand for creating inline image. [controller] should be same instance as
   /// one passed to the `StoryView`
   factory StoryItem.inlineImage({
-    required String url,
+    required bool isAsset,
+    final ImageProvider image = const AssetImage(""),
+    String? url,
     Text? caption,
+    Text? subCaption,
     required StoryController controller,
     Key? key,
     BoxFit imageFit = BoxFit.cover,
@@ -181,23 +184,43 @@ class StoryItem {
         child: Container(
           color: Colors.grey[100],
           child: Container(
-            color: Colors.black,
+            color: Colors.white,
             child: Stack(
               children: <Widget>[
-                StoryImage.url(
-                  url,
-                  controller: controller,
-                  fit: imageFit,
-                  requestHeaders: requestHeaders,
-                ),
+                isAsset
+                    ? Container(
+                        margin: EdgeInsets.only(bottom: 100),
+                        child: Image(
+                          image: image,
+                          height: double.infinity,
+                          width: double.infinity,
+                          fit: imageFit,
+                        ),
+                      )
+                    : StoryImage.url(
+                        url!,
+                        controller: controller,
+                        fit: imageFit,
+                        requestHeaders: requestHeaders,
+                      ),
                 Container(
                   margin: EdgeInsets.only(bottom: 16),
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                   child: Align(
                     alignment: Alignment.bottomLeft,
-                    child: Container(
-                      child: caption == null ? SizedBox() : caption,
-                      width: double.infinity,
+                    child: Column(
+                      children: [
+                        Spacer(),
+                        Container(
+                          child: caption == null ? SizedBox() : caption,
+                          width: double.infinity,
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          child: subCaption == null ? SizedBox() : subCaption,
+                          width: double.infinity,
+                        ),
+                      ],
                     ),
                   ),
                 ),
